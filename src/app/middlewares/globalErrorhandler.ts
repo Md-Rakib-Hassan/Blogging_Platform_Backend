@@ -14,7 +14,7 @@ const globalErrorHandler = (
 
   return res.status(statusCode).json({
     success: false,
-      message,
+    message,
     statusCode,
     error: err,
     stack: err?.stack,
