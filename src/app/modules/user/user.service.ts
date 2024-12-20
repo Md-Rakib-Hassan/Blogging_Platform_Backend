@@ -3,7 +3,6 @@ import { IUser } from './user.interface';
 import UserModel from './user.model';
 
 const createUserIntoDB = async (userData: IUser) => {
-    try {
         const isUserExist = await getSingleUserFromDB(userData.email);
         if (isUserExist) {
             throw new AppError(400, 'User already exists');
@@ -15,9 +14,7 @@ const createUserIntoDB = async (userData: IUser) => {
             email: createdUser.email,
         };
         return result;
-    } catch (err) { 
-        throw new AppError(401, 'Invalid credentials');
-    }
+    
 };
 
 const getSingleUserFromDB = async (email: string) => {
