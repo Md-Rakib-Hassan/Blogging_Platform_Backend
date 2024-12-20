@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import globalErrorHandler from './app/middlewares/globalErrorhandler';
 import router from './app/routes';
+import notFound from './app/middlewares/notFound';
 const app: Application = express();
 
 app.use(express.json());
@@ -13,5 +14,6 @@ app.get('/health', (req:Request, res:Response) => {
 app.use('/api', router);
 
 app.use(globalErrorHandler);
+app.use(notFound);
 
 export default app;
