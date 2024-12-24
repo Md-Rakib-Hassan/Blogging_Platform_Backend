@@ -1,9 +1,9 @@
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 
-const catchAsync = (fn: RequestHandler,errorCode:number|undefined=undefined) => {
+const catchAsync = (fn: RequestHandler,errorCode?:number) => {
   return (req: Request, res: Response, next: NextFunction) => {
       Promise.resolve(fn(req, res, next)).catch((err) => {
-          err.statusCode=errorCode||undefined;
+        if (errorCode) err.statusCode = errorCode;
           return next(err)
       });
   };

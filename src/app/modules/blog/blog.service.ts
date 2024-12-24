@@ -14,6 +14,11 @@ const createBlogIntoDB = async (payload: IBlog) => {
     return result;
 }
 
+const getSingleBlogFromDB = async (id: string) => { 
+    const result = await BlogModel.findById(id);
+    return result;
+}
+
 const updateBlogFromDB = async (payload: Partial<IBlog>, id: string) => {
     const isBlogExists = await getSingleBlogFromDB(id);
     if (!isBlogExists) {
@@ -29,18 +34,16 @@ const updateBlogFromDB = async (payload: Partial<IBlog>, id: string) => {
 }
 
 const deleteBlogFromDB = async (id: string) => {
+    // console.log(id);
     const isBlogExists = await getSingleBlogFromDB(id);
     if (!isBlogExists) {
-        throw new AppError(404,'Blog not found!!');
+        throw new AppError(404, 'Blog not found!!');
     }
     const result = await BlogModel.findByIdAndDelete(id);
     return result;
 }
 
-const getSingleBlogFromDB = async (id: string) => { 
-    const result = await BlogModel.findById(id);
-    return result;
-}
+
 
 export const BlogService = {
     createBlogIntoDB,
