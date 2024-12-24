@@ -18,6 +18,10 @@ const getSingleBlogFromDB = async (id: string) => {
     const result = await BlogModel.findById(id);
     return result;
 }
+const getAllBlogFromDB = async () => {
+    const result = await BlogModel.find();
+    return result;
+}
 
 const updateBlogFromDB = async (payload: Partial<IBlog>, id: string) => {
     const isBlogExists = await getSingleBlogFromDB(id);
@@ -49,5 +53,6 @@ export const BlogService = {
     createBlogIntoDB,
     updateBlogFromDB,
     getSingleBlogFromDB,
-    deleteBlogFromDB
+    deleteBlogFromDB,
+    getAllBlogFromDB
 } 

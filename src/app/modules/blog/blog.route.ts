@@ -5,8 +5,9 @@ import { BlogController } from './blog.controller';
 
 const router = express.Router();
 
-router.post('/blogs', validateRequest(BlogValidation.createBlogValidationSchema), BlogController.createBlog);
-router.patch('/blogs/:id', validateRequest(BlogValidation.updateBlogValidationSchema), BlogController.updateBlog);
-router.delete('/blogs/:id', BlogController.deleteBlog);
+router.post('/', validateRequest(BlogValidation.createBlogValidationSchema), BlogController.createBlog);
+router.patch('/:id', validateRequest(BlogValidation.updateBlogValidationSchema), BlogController.updateBlog);
+router.delete('/:id', BlogController.deleteBlog);
+router.get('/', BlogController.getAllBlog);
 
 export const BlogRoutes = router;
