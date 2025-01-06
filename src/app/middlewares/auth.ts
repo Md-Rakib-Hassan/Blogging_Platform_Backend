@@ -3,8 +3,9 @@ import AppError from "../errors/AppError";
 import catchAsync from "../utils/catchAsync"
 import config from "../config";
 import { UserService } from "../modules/user/user.service";
+import { TUserRole } from "../modules/user/user.interface";
 
-const auth = (...roles) => {
+const auth = (...roles:TUserRole[]) => {
     return catchAsync(async(req, res, next) => {
         const token = req.headers.authorization;
         if (!token) {
