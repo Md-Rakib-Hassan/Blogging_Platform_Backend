@@ -1,9 +1,10 @@
 import express from 'express';
 import { AdminController } from './admin.controller';
+import auth from '../../middlewares/auth';
 
 const router = express.Router();
 
-router.patch('/users/:id/block',AdminController.blockUser);
-router.delete('/blogs/:id',AdminController.deleteBlog);
+router.patch('/users/:id/block',auth('admin'),AdminController.blockUser);
+router.delete('/blogs/:id',auth('admin'),AdminController.deleteBlog);
 
 export const AdminRoutes = router;
