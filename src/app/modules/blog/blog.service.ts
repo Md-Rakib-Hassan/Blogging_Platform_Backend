@@ -4,7 +4,7 @@ import { BlogModel } from "./blog.model";
 import AppError from "../../errors/AppError";
 
 const createBlogIntoDB = async (payload: IBlog) => {
-    payload.author= new mongoose.Types.ObjectId();  // demo will change later dynamically
+    // payload.author= new mongoose.Types.ObjectId();  // demo will change later dynamically
     const createdBlog = await BlogModel.create(payload);
     const result = {
         _id: createdBlog._id,

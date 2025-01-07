@@ -16,7 +16,6 @@ const auth = (...roles:TUserRole[]) => {
         const { role, email } = decoded;
 
         const user = await UserService.getSingleUserFromDB(email);
-        
         if (!user) {
             throw new AppError(404,'User not found');
         }
@@ -26,6 +25,7 @@ const auth = (...roles:TUserRole[]) => {
         if (roles && !roles.includes(role)) {
             throw new AppError(401,'You are not authorized');
         }
+        decoded._id=user._id;
         req.user = decoded as JwtPayload;
         next();
     })
