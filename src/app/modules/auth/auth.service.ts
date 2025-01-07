@@ -13,7 +13,7 @@ const loginUser = async (payload:ILoginUser) => {
         throw new AppError(401, 'User is blocked');
     }
     if (user.password !== payload.password) {
-        throw new AppError(401, 'Invalid password');
+        throw new AppError(401, 'Invalid credentials');
     }
     const jwtPayload = {
         email: user.email,
