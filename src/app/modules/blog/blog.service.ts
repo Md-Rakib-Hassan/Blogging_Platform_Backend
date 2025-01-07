@@ -24,10 +24,13 @@ const getAllBlogFromDB = async () => {
     return result;
 }
 
-const updateBlogFromDB = async (payload: Partial<IBlog>, id: string) => {
+const updateBlogFromDB = async (payload: Partial<IBlog>, id: string,authorId:ObjectId) => {
     const isBlogExists = await getSingleBlogFromDB(id);
     if (!isBlogExists) {
         throw new AppError(404,'Blog not found');
+    }
+    if (isBlogExists?.author.toString() !== authorId.toString()) { 
+        throw new AppError(401, 'You are not authorized to update this blog');
     }
     const updatedBlog = await BlogModel.findByIdAndUpdate(id,payload,{new:true});
     const result = {
