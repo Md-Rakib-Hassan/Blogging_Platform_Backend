@@ -41,7 +41,7 @@ const updateBlogFromDB = async (payload: Partial<IBlog>, id: string,authorId:Obj
     return result;
 }
 
-const deleteBlogFromDB = async (id: string, authorId:string) => {
+const deleteBlogFromDB = async (id: string, authorId:ObjectId) => {
     // console.log(id);
     const isBlogExists = await getSingleBlogFromDB(id);
     if (!isBlogExists) {
