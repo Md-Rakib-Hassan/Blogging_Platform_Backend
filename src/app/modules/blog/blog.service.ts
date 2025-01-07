@@ -1,6 +1,7 @@
 import { IBlog } from "./blog.interface";
 import { BlogModel } from "./blog.model";
 import AppError from "../../errors/AppError";
+import { ObjectId } from "mongoose";
 
 const createBlogIntoDB = async (payload: IBlog) => {
 
@@ -37,11 +38,14 @@ const updateBlogFromDB = async (payload: Partial<IBlog>, id: string) => {
     return result;
 }
 
-const deleteBlogFromDB = async (id: string) => {
+const deleteBlogFromDB = async (id: string, authorId:string) => {
     // console.log(id);
     const isBlogExists = await getSingleBlogFromDB(id);
     if (!isBlogExists) {
         throw new AppError(404, 'Blog not found!!');
+    }
+    if (isBlogExists?.author.toString() !== authorId.toString()) { 
+        throw new AppError(401, 'You are not authorized to delete this blog');
     }
     const result = await BlogModel.findByIdAndDelete(id);
     return result;
