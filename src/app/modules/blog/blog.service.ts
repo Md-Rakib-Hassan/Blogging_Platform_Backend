@@ -1,15 +1,15 @@
-import mongoose from "mongoose";
 import { IBlog } from "./blog.interface";
 import { BlogModel } from "./blog.model";
 import AppError from "../../errors/AppError";
 
 const createBlogIntoDB = async (payload: IBlog) => {
-    // payload.author= new mongoose.Types.ObjectId();  // demo will change later dynamically
-    const createdBlog = await BlogModel.create(payload);
+
+    const createdBlog = await(await BlogModel.create(payload)).populate('author',);
     const result = {
         _id: createdBlog._id,
         title: createdBlog.title,
         content: createdBlog.content,
+        author: createdBlog.author,
     } 
     return result;
 }
