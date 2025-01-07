@@ -32,11 +32,12 @@ const updateBlogFromDB = async (payload: Partial<IBlog>, id: string,authorId:Obj
     if (isBlogExists?.author.toString() !== authorId.toString()) { 
         throw new AppError(401, 'You are not authorized to update this blog');
     }
-    const updatedBlog = await BlogModel.findByIdAndUpdate(id,payload,{new:true});
+    const updatedBlog = await BlogModel.findByIdAndUpdate(id,payload,{new:true}).populate('author');
     const result = {
         _id: updatedBlog._id,
         title: updatedBlog.title,
         content: updatedBlog.content,
+        author: updatedBlog.author,
     } 
     return result;
 }
