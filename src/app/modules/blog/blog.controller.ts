@@ -38,7 +38,11 @@ const deleteBlog = catchAsync(async (req, res) => {
 });
 
 const getAllBlog = catchAsync(async (req, res) => {
-
+  const { search, sortBy, sortOrder, filter } = req.query;
+  console.log('search', search);
+  console.log('sortBy', sortBy);
+  console.log('sortOrder', sortOrder);
+  console.log('filter', filter);
   const blogs = await BlogService.getAllBlogFromDB();
   sendResponse(res, {
     success: true,
