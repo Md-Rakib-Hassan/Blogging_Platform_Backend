@@ -1,4 +1,4 @@
-import { USER_ROLE } from "./user.constabts"
+import { USER_ROLE } from "./user.constants"
 
 export interface IUser{
 name: string,

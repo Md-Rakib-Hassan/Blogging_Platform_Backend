@@ -22,7 +22,14 @@ const getSingleUserFromDB = async (email: string) => {
   return result;
 };
 
+const getSingleUserFromDBById = async (id: string) => {
+  const result = await UserModel.findById(id);
+  return result;
+};
+
+
 export const UserService = {
   createUserIntoDB,
   getSingleUserFromDB,
+  getSingleUserFromDBById
 };

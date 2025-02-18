@@ -5,7 +5,7 @@ import UserModel from "../user/user.model"
 import { UserService } from "../user/user.service";
 
 const blockUser = async (id: string) => { 
-    const isUserExists = await UserService.getSingleUserFromDB(id);
+    const isUserExists = await UserService.getSingleUserFromDBById(id);
     if (!isUserExists) { 
         throw new AppError(404, 'User not found');
     }

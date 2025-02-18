@@ -2,6 +2,8 @@ import { IBlog } from "./blog.interface";
 import { BlogModel } from "./blog.model";
 import AppError from "../../errors/AppError";
 import { ObjectId } from "mongoose";
+import QueryBuilder from "../../builder/QueryBuilder";
+import { searchableFields } from "./blog.constants";
 
 const createBlogIntoDB = async (payload: IBlog) => {
 
@@ -19,9 +21,19 @@ const getSingleBlogFromDB = async (id: string) => {
     const result = await BlogModel.findById(id);
     return result;
 }
-const getAllBlogFromDB = async () => {
-    const result = await BlogModel.find();
-    return result;
+
+const getAllBlogFromDB = async (query: Record<string, unknown>) => {
+    // const result = await BlogModel.find().populate('author');
+    // return result;
+
+    
+    const searchQuery = new QueryBuilder(
+        BlogModel.find().populate('author'),
+        query
+      ).search(searchableFields).sort();
+    
+      const result = await searchQuery.modelQuery;
+      return result;
 }
 
 const updateBlogFromDB = async (payload: Partial<IBlog>, id: string,authorId:ObjectId) => {

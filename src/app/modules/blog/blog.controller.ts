@@ -38,12 +38,12 @@ const deleteBlog = catchAsync(async (req, res) => {
 });
 
 const getAllBlog = catchAsync(async (req, res) => {
-  const { search, sortBy, sortOrder, filter } = req.query;
-  console.log('search', search);
-  console.log('sortBy', sortBy);
-  console.log('sortOrder', sortOrder);
-  console.log('filter', filter);
-  const blogs = await BlogService.getAllBlogFromDB();
+  // const { search, sortBy, sortOrder, filter } = req.query;
+  // console.log('search', search);
+  // console.log('sortBy', sortBy);
+  // console.log('sortOrder', sortOrder);
+  // console.log('filter', filter);
+  const blogs = await BlogService.getAllBlogFromDB(req.query);
   sendResponse(res, {
     success: true,
     message: 'Blogs fetched successfully',
@@ -55,7 +55,7 @@ const getAllBlog = catchAsync(async (req, res) => {
 
 export const BlogController = {
   createBlog,
-    updateBlog,
+  updateBlog,
   deleteBlog,
   getAllBlog
 };

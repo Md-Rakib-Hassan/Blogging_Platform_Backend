@@ -7,7 +7,7 @@ import { TUserRole } from "../modules/user/user.interface";
 
 const auth = (...roles:TUserRole[]) => {
     return catchAsync(async(req, res, next) => {
-        const token = req.headers.authorization;
+        const token = (req.headers.authorization)?.replace('Bearer ', '');
         if (!token) {
             throw new AppError(401,'Unauthorized user');
         }
