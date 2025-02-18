@@ -46,10 +46,10 @@ const updateBlogFromDB = async (payload: Partial<IBlog>, id: string,authorId:Obj
     }
     const updatedBlog = await BlogModel.findByIdAndUpdate(id,payload,{new:true}).populate('author');
     const result = {
-        _id: updatedBlog._id,
-        title: updatedBlog.title,
-        content: updatedBlog.content,
-        author: updatedBlog.author,
+        _id: updatedBlog?._id,
+        title: updatedBlog?.title,
+        content: updatedBlog?.content,
+        author: updatedBlog?.author,
     } 
     return result;
 }

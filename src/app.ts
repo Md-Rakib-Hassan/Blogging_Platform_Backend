@@ -11,6 +11,9 @@ app.use(cors());
 app.get('/health', (req:Request, res:Response) => {
     res.send('Welcome Server is running!');
 })
+app.get('/', (req:Request, res:Response) => {
+    res.send('Welcome Server is running!');
+})
 app.use('/api', router);
 
 app.use(globalErrorHandler);
